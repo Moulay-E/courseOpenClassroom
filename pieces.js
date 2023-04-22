@@ -96,9 +96,21 @@ boutonFiltrer.addEventListener("click", function () {
     })
      console.log(piecesFiltrees)
 });
-// const boutonFiltrer = document.querySelector(".btn-filtrer");
-// boutonFiltrer.addEventListener("click", function () {
-//    const piecesFiltrees = pieces.filter(function (piece) {
-//        return piece.prix <= 35;
-//    })
-// });
+
+const filtrerDescription = document.querySelector(".btn-filtrer-description");
+filtrerDescription.addEventListener("click", function() {
+    const descriptionFiltrer = pieces.filter(function (piece) {
+        return piece.description;
+
+    })
+    console.log(descriptionFiltrer);
+});
+
+const prixDecroissant = document.querySelector(".btn-filtrer-decroissant");
+prixDecroissant.addEventListener("click", function (){
+    const decroissantPrix = Array.from(pieces);
+    decroissantPrix.sort(function(a, b){
+        return b.prix - a.prix;
+    });
+    console.log(decroissantPrix);
+});
