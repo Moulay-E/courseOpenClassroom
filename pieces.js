@@ -25,6 +25,9 @@ function genererPieces(pieces){
         const stockElement = document.createElement("p");
         stockElement.innerText = article.disponibilite ? "En stock" : "Rupture de stock";
 
+        const avisBouton = document.createElement("button");
+        avisBouton.dataset.id = article.id;
+        avisBouton.textContent = "Afficher les avis";
          //add tag to article in the dom
          const sectionFiches = document.querySelector(".fiches");
          sectionFiches.appendChild(pieceElement);
@@ -34,7 +37,8 @@ function genererPieces(pieces){
          pieceElement.appendChild(categorieElement);
          pieceElement.appendChild(descriptionElement);
          pieceElement.appendChild(stockElement);
-        sectionFiches.appendChild(pieceElement);
+         sectionFiches.appendChild(pieceElement);
+         pieceElement.appendChild(avisBouton);
         // document.body.appendChild(pieceElement);
     }
 }
