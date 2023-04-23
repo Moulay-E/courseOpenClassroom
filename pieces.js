@@ -4,27 +4,38 @@ const pieces = await fetch("pieces-autos.json").then(pieces => pieces.json());
 
 function genererPieces(pieces){
     for (let i = 0; i < pieces.length; i++) {
+        const article = pieces[i];
         const pieceElement = document.createElement("article");
 
         const imageElement = document.createElement("img");
-        imageElement.src = pieces[i].image;
-        pieceElement.appendChild(imageElement);
+        imageElement.src = article.image;
 
         const nomElement = document.createElement("h2");
-        nomElement.innerText = pieces[i].nom;
-        pieceElement.appendChild(nomElement);
+        nomElement.innerText = article.nom;
 
         const prixElement = document.createElement("p");
-        prixElement.innerHTML = pieces[i].prix;
-        pieceElement.appendChild(prixElement);
+        prixElement.innerHTML = `Prix: ${article.prix} €  (${article.prix < 35 ? "€" : "€ € € "})`;
 
-        // pieceElement.appendChild(categorieElement);
+        const categorieElement = document.createElement("p");
+        categorieElement.innerText= article.categorie ?? "(aucune categorie)";
 
-        // pieceElement.appendChild(descriptionElement);
+        const descriptionElement = document.createElement("p");
+        descriptionElement.innerText = article.description ?? "Pas de description pour le moment";
 
-        // pieceElement.appendChild(disponibiliteElement);
+        const stockElement = document.createElement("p");
+        stockElement.innerText = article.disponibilite ? "En stock" : "Rupture de stock";
 
-        document.body.appendChild(pieceElement);
+         //add tag to article in the dom
+         const sectionFiches = document.querySelector(".fiches");
+         sectionFiches.appendChild(pieceElement);
+         pieceElement.appendChild(imageElement);
+         pieceElement.appendChild(nomElement);
+         pieceElement.appendChild(prixElement);
+         pieceElement.appendChild(categorieElement);
+         pieceElement.appendChild(descriptionElement);
+         pieceElement.appendChild(stockElement);
+        sectionFiches.appendChild(pieceElement);
+        // document.body.appendChild(pieceElement);
     }
 }
 genererPieces(pieces);
@@ -33,35 +44,51 @@ const boutonTrier = document.querySelector(".btn-trier");
 boutonTrier.addEventListener("click", function () {
     const piecesOrdonnees = Array.from(pieces);
     piecesOrdonnees.sort(function(a,b){
-        return b.prix - a.prix;
+        return a.prix - b.prix;
     });
     document.querySelector(".fiches").innerHTML = "";
     genererPieces(piecesOrdonnees);
 });
 
+const boutonFiltrer = document.querySelector(".btn-filtrer");
+boutonFiltrer.addEventListener("click", function(){
+    const piecesFiltrees = pieces.filter(function (piece) {
+        return piece.prix < 35;
+    });
+    document.querySelector(".fiches").innerHTML = "";
+    genererPieces(piecesFiltrees);
+});
 
 
+const inputPrixMax = document.querySelector("#prix-filtre");
+inputPrixMax.addEventListener("input", function(){
+    const prixFiltrer = pieces.filter(function(piece){
+        return piece.prix <= inputPrixMax.value;
+    });
+    document.querySelector(".fiches").innerHTML="";
+    genererPieces(prixFiltrer);
+})
 
 // piece liste ---------------------------------
-const noms = pieces.map(piece => piece.nom);
-const abordablesPrix = pieces.map(piece => piece.prix);
+// const noms = pieces.map(piece => piece.nom);
+// const abordablesPrix = pieces.map(piece => piece.prix);
 
-for(let i = pieces.length -1; i >= 0; i--){
-    if(pieces[i].prix > 35){
-        noms.splice(i,1)
-        abordablesPrix.splice(i,1);
-    }
-}
-console.log(noms);
+// for(let i = pieces.length -1; i >= 0; i--){
+//     if(pieces[i].prix > 35){
+//         noms.splice(i,1)
+//         abordablesPrix.splice(i,1);
+//     }
+// }
+// console.log(noms);
 
-const abordablesElements = document.createElement("ul");
-for(let i = 0 ; i < noms.length; i++){
-    const nomsElement = document.createElement("li");
-    nomsElement.innerText = noms[i] + " " + abordablesPrix[i] +"€";
-    abordablesElements.appendChild(nomsElement);
-} 
-document.querySelector(".abordables")
-    .appendChild(abordablesElements);
+// const abordablesElements = document.createElement("ul");
+// for(let i = 0 ; i < noms.length; i++){
+//     const nomsElement = document.createElement("li");
+//     nomsElement.innerText = noms[i] + " " + abordablesPrix[i] +"€";
+//     abordablesElements.appendChild(nomsElement);
+// } 
+// document.querySelector(".abordables")
+//     .appendChild(abordablesElements);
 
 
 
