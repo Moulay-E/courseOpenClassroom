@@ -88,6 +88,7 @@ inputPrixMax.addEventListener("input", function(){
         genererPieces(descriptionFiltrer);
     });
 
+    // cimetirere et exercice -----------------
 // piece liste ---------------------------------
 // const noms = pieces.map(piece => piece.nom);
 // const abordablesPrix = pieces.map(piece => piece.prix);
