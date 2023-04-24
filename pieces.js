@@ -1,4 +1,4 @@
-
+import { ajoutListenersAvis } from "./avis.js";
 
 const pieces = await fetch("pieces-autos.json").then(pieces => pieces.json());
 
@@ -41,6 +41,7 @@ function genererPieces(pieces){
          pieceElement.appendChild(avisBouton);
         // document.body.appendChild(pieceElement);
     }
+    ajoutListenersAvis();
 }
 genererPieces(pieces);
 
