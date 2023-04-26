@@ -136,16 +136,6 @@ inputPrixMax.addEventListener("input", function(){
     //      console.log(piecesFiltrees)
     // });
     
-    // const filtrerDescription = document.querySelector(".btn-filtrer-description");
-    // filtrerDescription.addEventListener("click", function() {
-    //     const descriptionFiltrer = pieces.filter(function (piece) {
-    //         return piece.description;
-    
-    //     })
-    //     console.log(descriptionFiltrer);
-    // });
-    
-  
     
 
 // --utilisation de splice ---
