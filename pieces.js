@@ -1,7 +1,8 @@
-import { ajoutListenersAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
 
 const reponse = await fetch("http://localhost:8081/pieces");
 const pieces = await reponse.json();
+ajoutListenerEnvoyerAvis();
 
 function genererPieces(pieces){
     for (let i = 0; i < pieces.length; i++) {
@@ -93,6 +94,7 @@ inputPrixMax.addEventListener("input", function(){
         document.querySelector(".fiches").innerText = "";
         genererPieces(descriptionFiltrer);
     });
+
 
     // cimetirere et exercice -----------------
 // piece liste ---------------------------------
